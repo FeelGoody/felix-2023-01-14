@@ -1,0 +1,89 @@
+Pseudo code for testing API - /v1/weather 
+
+1. Import all necessary libraries,headers,tokens to call API calls and deal with JSON data.
+2. Design test cases for the API. These could include:
+	*. A test case for a valid lat/lon coordinate (negative test case without lat, then without lat)
+	*. A test case for a valid zip code
+	*. A test case for a valid city name only (negative test case without city, then with non-existent city)
+	*. A test case for a valid city name without a state or country
+	*. A test case for a valid state or country without city (negative)
+	*. A test case for a valid city name with a state
+	*. A test case for a valid city name with a country
+	*. A test case for an invalid location (such as a non-existent city or zip code)
+
+3.For each test case:
+	*. Construct the appropriate URL for the API call
+	*. Make the API call and store the response
+	*. Parse the response as JSON
+	*. Check that the response contains the expected data
+	*. If the response is not what was expected, print an error message
+	*. For performance test, record a response time for each call and compare delta, report if above SLA
+
+4. Example test case for a valid lat/lon coordinate:
+url = "https://ninja-weather.com/v1/weather?lat=35.6895&lon=139.6917"
+response = requests.get(url)
+data = response.json()
+
+check if the data contains expected values
+assert data['temp'] == 25
+assert data['humidity'] == '60'
+assert data['wind_speed'] == '8.05'
+
+if the above asserts passes, print success message
+print('Success: Test Case')
+
+
+
+
+5. Test case 1: Make a GET request to the API with a valid city name
+- create a variable `city` with the value "Dallas"
+- create a variable `url` with the value "https://ninja-weather.com/v1/weather?city=city"
+- make a GET request to the url
+- assert the response status code is 200
+- assert the response body contains the key "cloud_pct"
+- assert the response body contains the key "temp"
+- assert the response body contains the key "feels_like"
+- assert the response body contains the key "humidity"
+- assert the response body contains the key "min_temp"
+- assert the response body contains the key "max_temp"
+- assert the response body contains the key "wind_speed"
+- assert the response body contains the key "wind_degrees"
+- assert the response body contains the key "sunrise"
+- assert the response body contains the key "sunset"
+
+Test case 2: Make a GET request to the API with a valid city name and country
+- create a variable `city` with the value "Sao Paulo"
+- create a variable `country` with the value "Brazil"
+- create a variable `url` with the value "https://ninja-weather.com/v1/weather?city=city&country=country"
+- make a GET request to the url
+- assert the response status code is 200
+- assert the response body contains the key "cloud_pct"
+- assert the response body contains the key "temp"
+- assert the response body contains the key "feels_like"
+- assert the response body contains the key "humidity"
+- assert the response body contains the key "min_temp"
+- assert the response body contains the key "max_temp"
+- assert the response body contains the key "wind_speed"
+- assert the response body contains the key "wind_degrees"
+- assert the response body contains the key "sunrise"
+- assert the response body contains the key "sunset"
+
+Test case 3: Make a GET request to the API with a valid zip code
+- create a variable `zip` with the value "75201"
+- create a variable `url` with the value "https://ninja-weather.com/v1/weather?zip=zip"
+- make a GET request to the url
+- assert the response status code is 200
+- assert the response body contains the key "cloud_pct"
+- assert the response body contains the key "temp"
+- assert the response body contains the key "feels_like"
+- assert the response body contains the key "humidity"
+- assert the response body contains the key "min_temp"
+- assert the response body contains the key "max_temp"
+- assert the response body contains the key "wind_speed"
+- assert the response body contains the key "wind_degrees"
+- assert the response body contains the key "sunrise"
+- assert the response body contains the key "sunset"
+
+Test case 4: Make a GET request to the API with valid geolocation coordinates (latitude/longitude)
+- create a variable `lat` with the value "32.7767"
+- create a variable `lon` with the value "96.7970
